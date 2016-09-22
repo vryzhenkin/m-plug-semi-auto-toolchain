@@ -50,9 +50,11 @@ EOF
 ID=$(docker images | awk '/rally/ {print $3}')
 echo "LOG: INFO rally image id=$ID"
 
+docker rm $(docker ps -aq)
+
 sudo -H docker save -o "$WORKSPACE/dimage" rally-tempest
 
-sudo mv "$WORKSPACE/dimage" /home/rally
+sudo mv "$WORKSPACE/dimage" /root/rally
 
 docker rmi $ID
 
